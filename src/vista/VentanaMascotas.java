@@ -26,7 +26,7 @@ import javax.swing.JSeparator;
 
 public class VentanaMascotas extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField txtId;
 	private JTextField txtRaza;
@@ -71,74 +71,100 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		lblTitulo = new JLabel("Gestionar Mascotas");
 		lblId = new JLabel("Id Dueño:");
-		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 100, 95, 30);
-		contentPane.add(lblId);
+		lblNombre = new JLabel("Nombre:");
+		lblRaza = new JLabel("Raza:");
+		lblSexo = new JLabel("Sexo:");
 		
 		txtId = new JTextField();
-		txtId.setBounds(100, 100, 200, 30);
-		contentPane.add(txtId);
-		txtId.setColumns(10);
+		txtNombre = new JTextField();
+		txtRaza = new JTextField();
+		txtSexo = new JTextField();
 		
-		lblTitulo = new JLabel("Gestionar Mascotas");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 30));
 		lblTitulo.setBounds(10, 20, 576, 40);
 		contentPane.add(lblTitulo);
 		
-		lblRaza = new JLabel("Raza:");
-		lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblRaza.setBounds(315, 100, 60, 30);
-		contentPane.add(lblRaza);
+	
+		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblId.setBounds(30, 100, 95, 30);
+		contentPane.add(lblId);
 		
-		txtRaza = new JTextField();
-		txtRaza.setColumns(10);
-		txtRaza.setBounds(376, 100, 200, 30);
-		contentPane.add(txtRaza);
 		
-		lblNombre = new JLabel("Nombre:");
+		txtId.setBounds(120, 100, 165, 30);
+		contentPane.add(txtId);
+		txtId.setColumns(10);
+		
+		
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNombre.setBounds(10, 170, 81, 30);
+		lblNombre.setBounds(30, 170, 81, 30);
 		contentPane.add(lblNombre);
 		
-		txtNombre = new JTextField();
+		
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(100, 170, 200, 30);
+		txtNombre.setBounds(110, 170, 175, 30);
 		contentPane.add(txtNombre);
 		
+		
+		lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblRaza.setBounds(295, 100, 60, 30);
+		contentPane.add(lblRaza);
+		
+	
+		txtRaza.setColumns(10);
+		txtRaza.setBounds(356, 100, 200, 30);
+		contentPane.add(txtRaza);
+		
+		
+	
+		lblSexo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSexo.setBounds(295, 170, 81, 30);
+		contentPane.add(lblSexo);
+		
+	
+		txtSexo.setColumns(10);
+		txtSexo.setBounds(356, 170, 200, 30);
+		contentPane.add(txtSexo);
+		
 		btnRegistrar = new JButton("Registrar");
+		btnConsultar = new JButton("Consultar");
+		btnActualizar = new JButton("Actualizar");
+		btnEliminar = new JButton("Eliminar");
+		btnConsultarLista = new JButton("Consultar Lista");
+		
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegistrar.setBounds(80, 240, 180, 40);
 		contentPane.add(btnRegistrar);
 		btnRegistrar.addActionListener(this);
 		
-		btnConsultar = new JButton("Consultar");
+		
 		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConsultar.setBounds(321, 240, 180, 40);
 		contentPane.add(btnConsultar);
 		btnConsultar.addActionListener(this);
 		
-		btnActualizar = new JButton("Actualizar");
+		
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnActualizar.setBounds(80, 300, 180, 40);
 		contentPane.add(btnActualizar);
 		btnActualizar.addActionListener(this);
 		
-		btnEliminar = new JButton("Eliminar");
+	
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminar.setBounds(321, 300, 180, 40);
 		contentPane.add(btnEliminar);
 		btnEliminar.addActionListener(this);
 		
-		btnConsultarLista = new JButton("Consultar Lista");
+		
 		btnConsultarLista.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConsultarLista.setBounds(80, 360, 421, 40);
 		contentPane.add(btnConsultarLista);
 		btnConsultarLista.addActionListener(this);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 420, 566, 320);
+		scrollPane.setBounds(40, 420, 500, 280);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -148,15 +174,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 		separator.setBounds(30, 220, 532, 2);
 		contentPane.add(separator);
 		
-		lblSexo = new JLabel("Sexo:");
-		lblSexo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSexo.setBounds(315, 170, 81, 30);
-		contentPane.add(lblSexo);
 		
-		txtSexo = new JTextField();
-		txtSexo.setColumns(10);
-		txtSexo.setBounds(376, 170, 200, 30);
-		contentPane.add(txtSexo);
 		
 	}
 
@@ -212,6 +230,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 			}
 	}
 	
+	
 	public void actualizarMascota() {
 		String resultado = "";
 		String id= txtId.getText();
@@ -240,6 +259,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 			}
 	}
 	
+	
 	public void consultarMascota() {
 		String id = txtId.getText();
 		
@@ -265,6 +285,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 		}
 	}
 	
+	
 	public void eliminacionMascota() {
 		String resultado="";
 		String id = txtId.getText();
@@ -287,6 +308,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 		}
 	}
 	
+	
 	public void consultarListMascota() {
 		StringBuilder listaMascota = new StringBuilder();
 		for(MascotaVO mascota: miControlador.consultarListaMascota()) {
@@ -298,6 +320,7 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 		
 		textArea.setText(!listaMascota.isEmpty() ? listaMascota.toString() : "No hay mascotas registradas");
 	}
+	
 	
 	private void limpiarCampos() {
 		txtId.setText("");

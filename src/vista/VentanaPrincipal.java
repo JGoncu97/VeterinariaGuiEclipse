@@ -9,15 +9,19 @@ import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
+	
 	private JPanel panelPrincipal;
 	private JLabel lblTitulo;
 	private JButton btnPersonas;
@@ -25,9 +29,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private Controlador miControlador;
 	
 
-	/**
-	 * Create the frame.
-	 */
+
 	public VentanaPrincipal() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,11 +42,14 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		
 	}
 	
+	
+	
 
 	private void iniciarComponentes() {
 		setBounds(100, 100, 657, 491);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 
 		setContentPane(panelPrincipal);
 		panelPrincipal.setLayout(null);		

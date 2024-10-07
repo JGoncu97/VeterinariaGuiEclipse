@@ -278,9 +278,9 @@ public class VentanaPersonas extends JFrame implements ActionListener {
 	public void consultarListPersona() {
 		StringBuilder listaPersona = new StringBuilder();
 		for(PersonaVO persona: miControlador.consultarListaPersonas()) {
-			listaPersona.append("Documento: ").append(persona.getDocumento())
-						.append(", Nombre: ").append(persona.getNombre())
-						.append(", Telefono: ").append(persona.getTelefono()).append("\n");
+			listaPersona.append("Documento: ").append(persona.getDocumento()).append("\n")
+						.append(", Nombre: ").append(persona.getNombre()).append("\n")
+						.append(", Telefono: ").append(persona.getTelefono()).append("\n\n");
 		}
 		
 		textArea.setText(!listaPersona.isEmpty() ? listaPersona.toString() : "No hay personas registradas");
