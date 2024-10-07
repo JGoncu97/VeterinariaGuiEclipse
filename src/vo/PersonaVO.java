@@ -1,4 +1,4 @@
-package modelo.vo;
+package vo;
 
 public class PersonaVO {
 	

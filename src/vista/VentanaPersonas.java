@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
-import modelo.vo.PersonaVO;
+import vo.PersonaVO;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

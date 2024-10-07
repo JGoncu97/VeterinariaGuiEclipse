@@ -1,4 +1,4 @@
-package modelo.operaciones;
+package logica;
 
 import controlador.Controlador;
 

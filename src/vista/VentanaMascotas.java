@@ -7,9 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
+import vo.MascotaVO;
+import vo.PersonaVO;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -17,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 
-public class VentanaMascotas extends JFrame {
+public class VentanaMascotas extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -104,26 +111,31 @@ public class VentanaMascotas extends JFrame {
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegistrar.setBounds(80, 240, 180, 40);
 		contentPane.add(btnRegistrar);
+		btnRegistrar.addActionListener(this);
 		
 		btnConsultar = new JButton("Consultar");
 		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConsultar.setBounds(321, 240, 180, 40);
 		contentPane.add(btnConsultar);
+		btnConsultar.addActionListener(this);
 		
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnActualizar.setBounds(80, 300, 180, 40);
 		contentPane.add(btnActualizar);
+		btnActualizar.addActionListener(this);
 		
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminar.setBounds(321, 300, 180, 40);
 		contentPane.add(btnEliminar);
+		btnEliminar.addActionListener(this);
 		
 		btnConsultarLista = new JButton("Consultar Lista");
 		btnConsultarLista.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnConsultarLista.setBounds(80, 360, 421, 40);
 		contentPane.add(btnConsultarLista);
+		btnConsultarLista.addActionListener(this);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 420, 566, 320);
@@ -153,4 +165,144 @@ public class VentanaMascotas extends JFrame {
 		
 	}
 
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()== btnRegistrar) {
+			registrarMascota();
+		}else if ( e.getSource()== btnActualizar) {
+			actualizarMascota();
+		}else if( e.getSource()== btnConsultar) {
+			consultarMascota();
+		}else if ( e.getSource()== btnEliminar) {
+			eliminacionMascota();
+		}else if( e.getSource() == btnConsultarLista) {
+			consultarListMascota();
+		}
+		
+	}
+	
+	public void registrarMascota() {
+		String resultado = "";
+		String id= txtId.getText();
+		String nombre= txtNombre.getText();
+		String raza= txtRaza.getText();
+		String sexo= txtSexo.getText();
+		
+		if (id.isEmpty() || nombre.isEmpty() || raza.isEmpty() || sexo.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos los campos deben estar diligenciados obligatoriamente");
+				
+			} else {
+				MascotaVO miMascota = new MascotaVO();
+				miMascota.setIdDueño(id);
+				miMascota.setNombre(nombre);
+				miMascota.setRaza(raza);
+				miMascota.setSexo(sexo);
+				
+
+				
+				resultado = miControlador.registrarMascota(miMascota);
+				
+
+				
+				JOptionPane.showMessageDialog(null, resultado);
+				
+				limpiarCampos();
+				
+			}
+	}
+	
+	public void actualizarMascota() {
+		String resultado = "";
+		String id= txtId.getText();
+		String nombre= txtNombre.getText();
+		String raza= txtRaza.getText();
+		String sexo= txtSexo.getText();
+		
+		if (id.isEmpty() || nombre.isEmpty() || raza.isEmpty() || sexo.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos los campos deben estar diligenciados obligatoriamente");
+				
+			} else {
+				MascotaVO miMascota = new MascotaVO();
+				miMascota.setIdDueño(id);
+				miMascota.setNombre(nombre);
+				miMascota.setRaza(raza);
+				miMascota.setSexo(sexo);
+				
+				
+
+				resultado = miControlador.actualizarMascota(miMascota);
+				
+				JOptionPane.showMessageDialog(null, resultado);
+				
+				limpiarCampos();
+				
+			}
+	}
+	
+	public void consultarMascota() {
+		String id = txtId.getText();
+		
+		if (id.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Ingrese el id para verificar la existencia en los registros");
+			
+		} else {
+			try {
+				MascotaVO miMascota = miControlador.consultarMascota(id);
+				if (miMascota == null) {
+					textArea.setText("La Mascota no se encuentra en los registros");
+					
+				} else {
+					textArea.setText(miMascota.toString());
+					
+				}
+				
+			} catch (RuntimeException e) {
+				JOptionPane.showMessageDialog(null, "Error al consultar la Mascota: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			
+		}
+	}
+	
+	public void eliminacionMascota() {
+		String resultado="";
+		String id = txtId.getText();
+		if(id.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Ingrese id para verificar la existencia en los registros");
+		}else {
+			try {
+				MascotaVO miMascota= miControlador.consultarMascota(id);
+				if(miMascota== null) {
+					textArea.setText("La mascota no se encuentra en los registros");
+				}else {
+					resultado= miControlador.eliminarMascota(id);
+					textArea.setText(resultado);
+					
+				}
+				
+			}catch(RuntimeException e) {
+				
+			}
+		}
+	}
+	
+	public void consultarListMascota() {
+		StringBuilder listaMascota = new StringBuilder();
+		for(MascotaVO mascota: miControlador.consultarListaMascota()) {
+			listaMascota.append("Id Dueño: ").append(mascota.getIdDueño()).append("\n")
+						.append(", Nombre: ").append(mascota.getNombre()).append("\n")
+						.append(", Raza: ").append(mascota.getRaza()).append("\n")
+						.append(", Sexo: ").append(mascota.getSexo()).append("\n\n");
+		}
+		
+		textArea.setText(!listaMascota.isEmpty() ? listaMascota.toString() : "No hay mascotas registradas");
+	}
+	
+	private void limpiarCampos() {
+		txtId.setText("");
+		txtRaza.setText("");
+		txtNombre.setText("");
+		txtSexo.setText("");
+	}
 }

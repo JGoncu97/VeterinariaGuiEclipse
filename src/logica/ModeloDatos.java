@@ -1,10 +1,12 @@
-package modelo.vo;
+package logica;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import controlador.Controlador;
+import vo.MascotaVO;
+import vo.PersonaVO;
 
 public class ModeloDatos {
 

@@ -3,13 +3,15 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.dao.PersonaDAO;
-import modelo.operaciones.Procesos;
-import modelo.vo.ModeloDatos;
-import modelo.vo.PersonaVO;
+import dao.MascotaDAO;
+import dao.PersonaDAO;
+import logica.ModeloDatos;
+import logica.Procesos;
 import vista.VentanaMascotas;
 import vista.VentanaPersonas;
 import vista.VentanaPrincipal;
+import vo.MascotaVO;
+import vo.PersonaVO;
 
 public class Controlador {
 
@@ -19,6 +21,7 @@ public class Controlador {
 	private ModeloDatos miModeloDatos;
 	private Procesos miProcesos;
 	private PersonaDAO miPersonaDAO;
+	private MascotaDAO miMascotaDAO;
 
 	public void setVentanaPrincipal(VentanaPrincipal miVentanaPrincipal) {
 		this.miVentanaPrincipal = miVentanaPrincipal;
@@ -39,6 +42,10 @@ public class Controlador {
 		this.miPersonaDAO = miPersonaDAO;
 		
 	}
+	
+	public void setMascotaDAO(MascotaDAO miMascotaDAO) {
+		this.miMascotaDAO= miMascotaDAO;
+	}
 
 	public void setmiModeloDatos(ModeloDatos miModeloDatos) {
 		this.miModeloDatos = miModeloDatos;
@@ -50,10 +57,7 @@ public class Controlador {
 		
 	}
 
-	public void mostrarVentanaPrincipal() {
-		miVentanaPrincipal.setVisible(true);
-		
-	}
+	
 	
 	public void mostrarVentanaPersonas() {
 		miVentanaPersonas.setVisible(true);
@@ -89,28 +93,32 @@ public class Controlador {
 		return miPersonaDAO.consultarPersonas();
 	}
 
-	 
-	
-	
-	/* public String registrarPersona(PersonaVO miPersonaVO) {
-		return miModeloDatos.registrarPersona(miPersonaVO);
-		
+	public String registrarMascota(MascotaVO miMascota) {
+		return miMascotaDAO.registrarMascota(miMascota);
 	}
-	
-	public void consultarPersona(String documento) {
-		miModeloDatos.consultarPersona(documento);
-		
+
+	public String actualizarMascota(MascotaVO miMascota) {
+		return miMascotaDAO.actualizarMascota(miMascota);
 	}
-	
-	public String actualizarPersona(PersonaVO miPersonaVO) {
-		return miModeloDatos.actualizarPersona(miPersonaVO);
+
+	public MascotaVO consultarMascota(String id) {
 		
+		return miMascotaDAO.consultarMascota(id);
 	}
+
+	public String eliminarMascota(String id) {
 	
-	public String eliminarPersona(String documento) {
-		return miModeloDatos.eliminarPersona(documento);
+		return miMascotaDAO.eliminarMascota(id);
+	}
+
+	public List<MascotaVO> consultarListaMascota() {
 		
-	} */
+		return miMascotaDAO.consultarMascotas();
+	}
+
+	
+	
+
 	
 
 }

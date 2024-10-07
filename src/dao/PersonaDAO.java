@@ -1,4 +1,4 @@
-package modelo.dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import javax.management.RuntimeErrorException;
 import javax.swing.JOptionPane;
 
+import conexion.Conexion;
 import controlador.Controlador;
-import modelo.conexion.Conexion;
-import modelo.vo.PersonaVO;
+import vo.PersonaVO;
 
 public class PersonaDAO {
 	
