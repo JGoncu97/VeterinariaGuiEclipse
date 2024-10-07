@@ -20,6 +20,10 @@ public class PersonaDAO {
 	public String registrarPersona(PersonaVO miPersonaVO) {
 		String resultado ="";
 		
+		if (existeIdDueño(miPersonaVO.getDocumento())) {
+	        return "Error: La persona con el Documento: " + miPersonaVO.getDocumento() + " ya existe.";
+	    }
+		
 		Connection connection = null;
 		Conexion conexion = new Conexion();
 		PreparedStatement preStatement = null;
@@ -199,6 +203,42 @@ public class PersonaDAO {
 		
 			return listaPersonas;
 			
+	}
+	
+	public boolean existeIdDueño(String documento) {
+	    Connection connection = null;
+	    Conexion conexion = new Conexion();
+	    PreparedStatement preStatement = null;
+	    ResultSet result = null;
+	    boolean existe = false;
+	    
+	    String consulta = "SELECT documento FROM persona WHERE documento = ?";
+	    
+	    try {
+	        connection = conexion.getConnection();
+	        preStatement = connection.prepareStatement(consulta);
+	        preStatement.setString(1, documento);
+	        result = preStatement.executeQuery();
+	        
+	        if (result.next()) {
+	            existe = true; 
+	        }
+	        
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Error al validar el documento de la Persona: " + e.getMessage());
+	        
+	    } finally {
+	        try {
+	            if (result != null) result.close();
+	            if (preStatement != null) preStatement.close();
+	            conexion.desconectar();
+	            
+	        } catch (SQLException e) {
+	            throw new RuntimeException("Error al cerrar los recursos: " + e.getMessage());
+	        }
+	    }
+	    
+	    return existe;
 	}
 
 	public void setControlador(Controlador miControlador) {

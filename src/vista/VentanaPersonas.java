@@ -25,7 +25,6 @@ import javax.swing.JSeparator;
 
 public class VentanaPersonas extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
 	private JPanel miPanel;
 	private JTextField txtDoc;
 	private JTextField txtTelefono;

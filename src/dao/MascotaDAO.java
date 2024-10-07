@@ -21,6 +21,10 @@ public class MascotaDAO {
 	public String registrarMascota(MascotaVO miMascota) {
 		String resultado ="";
 				
+		if (existeIdDueño(miMascota.getIdDueño())) {
+	        return "Error: La mascota con ID: " + miMascota.getIdDueño() + " ya existe.";
+	    }
+		
 				Connection connection = null;
 				Conexion conexion = new Conexion();
 				PreparedStatement preStatement = null;
@@ -200,6 +204,42 @@ public class MascotaDAO {
 		}
 		
 			return listaMascotas;
+	}
+	
+	public boolean existeIdDueño(String idDueño) {
+	    Connection connection = null;
+	    Conexion conexion = new Conexion();
+	    PreparedStatement preStatement = null;
+	    ResultSet result = null;
+	    boolean existe = false;
+	    
+	    String consulta = "SELECT propietario FROM mascota WHERE propietario = ?";
+	    
+	    try {
+	        connection = conexion.getConnection();
+	        preStatement = connection.prepareStatement(consulta);
+	        preStatement.setString(1, idDueño);
+	        result = preStatement.executeQuery();
+	        
+	        if (result.next()) {
+	            existe = true; 
+	        }
+	        
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Error al validar el ID del propietario: " + e.getMessage());
+	        
+	    } finally {
+	        try {
+	            if (result != null) result.close();
+	            if (preStatement != null) preStatement.close();
+	            conexion.desconectar();
+	            
+	        } catch (SQLException e) {
+	            throw new RuntimeException("Error al cerrar los recursos: " + e.getMessage());
+	        }
+	    }
+	    
+	    return existe;
 	}
 	
 	public void setControlador(Controlador miControlador) {
