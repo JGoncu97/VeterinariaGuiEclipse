@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexion {
 	private String entregable_mascotas = "guiveterinaria";
 	private String usuario = "root";
-	private String password = "pipe123.";
+	private String password = "";
 	private String url = "jdbc:mysql://localhost:3306/"+entregable_mascotas+"?useUnicode=true&use"
 			+ "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&"
 			+ "serverTimezone=UTC";

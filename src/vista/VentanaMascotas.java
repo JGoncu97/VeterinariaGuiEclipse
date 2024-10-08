@@ -312,10 +312,11 @@ public class VentanaMascotas extends JFrame implements ActionListener {
 	public void consultarListMascota() {
 		StringBuilder listaMascota = new StringBuilder();
 		for(MascotaVO mascota: miControlador.consultarListaMascota()) {
-			listaMascota.append("Id Dueño: ").append(mascota.getIdDueño()).append("\n")
-						.append(", Nombre: ").append(mascota.getNombre()).append("\n")
-						.append(", Raza: ").append(mascota.getRaza()).append("\n")
-						.append(", Sexo: ").append(mascota.getSexo()).append("\n\n");
+			listaMascota.append("Mascota: ").append("\n")
+						.append("Id Dueño: ").append(mascota.getIdDueño()).append("\n")
+						.append("Nombre: ").append(mascota.getNombre()).append("\n")
+						.append("Raza: ").append(mascota.getRaza()).append("\n")
+						.append("Sexo: ").append(mascota.getSexo()).append("\n\n");
 		}
 		
 		textArea.setText(!listaMascota.isEmpty() ? listaMascota.toString() : "No hay mascotas registradas");
