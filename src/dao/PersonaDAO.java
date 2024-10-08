@@ -20,7 +20,7 @@ public class PersonaDAO {
 	public String registrarPersona(PersonaVO miPersonaVO) {
 		String resultado ="";
 		
-		if (existeIdDueño(miPersonaVO.getDocumento())) {
+		if (existeDocumento(miPersonaVO.getDocumento())) {
 	        return "Error: La persona con el Documento: " + miPersonaVO.getDocumento() + " ya existe.";
 	    }
 		
@@ -205,7 +205,7 @@ public class PersonaDAO {
 			
 	}
 	
-	public boolean existeIdDueño(String documento) {
+	public boolean existeDocumento(String documento) {
 	    Connection connection = null;
 	    Conexion conexion = new Conexion();
 	    PreparedStatement preStatement = null;
